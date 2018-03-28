@@ -1,0 +1,14 @@
+.c-table {
+  margin: 30px; }
+  .c-table__row {
+    display: flex; }
+  .c-table__cell--pool {
+    width: 5%; }
+  .c-table__cell--offer {
+    width: 15%; }
+  .c-table__cell--blog-lists {
+    width: 20%; }
+  .c-table__cell--real-lists {
+    width: 20%; }
+  .c-table__cell--b-amount, .c-table__cell--r-amount, .c-table__cell--w-count, .c-table__cell--ip-count {
+    width: 10%; }
