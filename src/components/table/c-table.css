@@ -1,14 +1,32 @@
 .c-table {
-  margin: 30px; }
+  margin: 30px;
+  color: #5e6981;
+  border: 1px solid #e3e3e3;
+  border-radius: 3px;
+  background-color: #fff; }
+  .c-table__header .c-table__cell {
+    font-weight: 600; }
   .c-table__row {
     display: flex; }
-  .c-table__cell--pool {
-    width: 5%; }
-  .c-table__cell--offer {
-    width: 15%; }
-  .c-table__cell--blog-lists {
-    width: 20%; }
-  .c-table__cell--real-lists {
-    width: 20%; }
-  .c-table__cell--b-amount, .c-table__cell--r-amount, .c-table__cell--w-count, .c-table__cell--ip-count {
-    width: 10%; }
+    .c-table__row:not(:last-child) {
+      border-bottom: 1px solid #e3e3e3; }
+    .c-table__row:nth-child(even) {
+      background-color: #f2f2f2; }
+  .c-table__cell {
+    padding: 5px;
+    font-size: 12px;
+    font-weight: 300; }
+    .c-table__cell:not(:last-child) {
+      border-right: 1px solid #e3e3e3; }
+    .c-table__cell--pool {
+      width: 7%; }
+    .c-table__cell--offer {
+      width: 19%; }
+    .c-table__cell--blog-lists {
+      width: 25%; }
+    .c-table__cell--real-lists {
+      width: 25%; }
+    .c-table__cell--b-amount, .c-table__cell--r-amount {
+      width: 6%; }
+    .c-table__cell--w-count, .c-table__cell--ip-count {
+      width: 5%; }

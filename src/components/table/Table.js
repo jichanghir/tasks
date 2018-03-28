@@ -13,7 +13,10 @@ class Table extends Component {
         this.state = {}
     };
 
-    static propTypes = {};
+    static propTypes = {
+        tasks: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+        getTasks: PropTypes.func.isRequired
+    };
     static defaultProps = {};
 
     // componentWillReceiveProps(nextProps) {};
@@ -36,7 +39,7 @@ class Table extends Component {
                 {this.props.tasks.map((task) =>
                     <div
                         key={task['name']}
-                        className="c-table__header c-table__row"
+                        className="c-table__row"
                     >
                         <div className="c-table__cell c-table__cell--pool">{task['name']}</div>
                         <div className="c-table__cell c-table__cell--offer">{task['offer']}</div>
@@ -74,7 +77,25 @@ class Table extends Component {
 
 export default connect(
     state => ({
-        tasks: state.tasks
+        // Фильтруем task по всем полям
+        tasks: state.tasks.filter((task) =>
+            task.name.toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
+            task.offer.toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
+            String(task['real-size']).toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
+            String(task['blog-size']).toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
+            String(task['count-of-waves']).toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
+            String(task['count-of-IPs']).toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
+            task['blog-lists']
+                .some((list) =>
+                    list.name.toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
+                    list.size.toLowerCase().includes(state.tableSettings.filter.toLowerCase())
+                ) ||
+            task['real-lists']
+                .some((list) =>
+                    list.name.toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
+                    list.size.toLowerCase().includes(state.tableSettings.filter.toLowerCase())
+                )
+        )
     }),
     dispatch => ({
         getTasks: (data) => {

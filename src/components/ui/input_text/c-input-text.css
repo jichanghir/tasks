@@ -1,0 +1,62 @@
+.c-input-text input[type="text"],
+.c-input-text input[type="password"] {
+  height: 30px;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  padding: 0 8px;
+  outline: none;
+  width: 100%;
+  font-size: 13px;
+  color: #232323; }
+  .c-input-text input[type="text"][disabled],
+  .c-input-text input[type="password"][disabled] {
+    color: #b2b2b2; }
+  .c-input-text input[type="text"]:focus, .c-input-text input[type="text"]:hover,
+  .c-input-text input[type="password"]:focus,
+  .c-input-text input[type="password"]:hover {
+    border: 1px solid #b2b2b2; }
+  .c-input-text input[type="text"]::-webkit-input-placeholder, .c-input-text input[type="password"]::-webkit-input-placeholder {
+    color: #b2b2b2;
+    font-size: 13px;
+    font-weight: 300; }
+  .c-input-text input[type="text"]:-moz-placeholder, .c-input-text input[type="password"]:-moz-placeholder {
+    color: #b2b2b2;
+    font-size: 13px;
+    font-weight: 300; }
+  .c-input-text input[type="text"]::-moz-placeholder, .c-input-text input[type="password"]::-moz-placeholder {
+    color: #b2b2b2;
+    font-size: 13px;
+    font-weight: 300; }
+  .c-input-text input[type="text"]:-ms-input-placeholder, .c-input-text input[type="password"]:-ms-input-placeholder {
+    color: #b2b2b2;
+    font-size: 13px;
+    font-weight: 300; }
+
+.c-input-text__errortext {
+  color: #e23e57;
+  font-size: 10px;
+  padding-top: 2px; }
+
+.c-input-text--search input {
+  background-image: url("./img/search.svg");
+  background-position: 10px center;
+  background-repeat: no-repeat; }
+  .c-input-text--search input::-webkit-input-placeholder {
+    padding-left: 20px; }
+  .c-input-text--search input:-moz-placeholder {
+    padding-left: 20px; }
+  .c-input-text--search input::-moz-placeholder {
+    padding-left: 20px; }
+  .c-input-text--search input:-ms-input-placeholder {
+    padding-left: 20px; }
+
+.c-input-text--search input:active, .c-input-text--search input:focus {
+  background-image: none; }
+  .c-input-text--search input:active::-webkit-input-placeholder, .c-input-text--search input:focus::-webkit-input-placeholder {
+    opacity: 0; }
+  .c-input-text--search input:active:-moz-placeholder, .c-input-text--search input:focus:-moz-placeholder {
+    opacity: 0; }
+  .c-input-text--search input:active::-moz-placeholder, .c-input-text--search input:focus::-moz-placeholder {
+    opacity: 0; }
+  .c-input-text--search input:active:-ms-input-placeholder, .c-input-text--search input:focus:-ms-input-placeholder {
+    opacity: 0; }

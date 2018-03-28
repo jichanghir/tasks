@@ -1,0 +1,92 @@
+$lightgrey: #b2b2b2;
+$darkgrey: #707070;
+$white: #fff;
+$black: #232323;
+$red: #e23e57;
+
+@mixin optional-at-root($sel) {
+    @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+        @content;
+    }
+}
+
+@mixin placeholder {
+    @include optional-at-root('::-webkit-input-placeholder') {
+        @content;
+    }
+
+    @include optional-at-root(':-moz-placeholder') {
+        @content;
+    }
+
+    @include optional-at-root('::-moz-placeholder') {
+        @content;
+    }
+
+    @include optional-at-root(':-ms-input-placeholder') {
+        @content;
+    }
+}
+
+.c-input-text {
+  // display: inline-block;
+
+  input[type="text"],
+  input[type="password"] {
+    height: 30px;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    padding: 0 8px;
+    outline: none;
+    width: 100%;
+
+    font-size: 13px;
+    color: $black;
+
+    &[disabled] {
+      color: $lightgrey;
+    }
+
+    &:focus , &:hover {
+      border: 1px solid $lightgrey;
+    }
+
+    @include placeholder {
+      color: $lightgrey;
+      font: {
+        size: 13px;
+        weight: 300;
+      }
+    }
+
+
+  }
+
+  &__errortext {
+    color: $red;
+    font-size: 10px;
+
+    padding-top: 2px;
+  }
+
+  &--search {
+    input {
+      background: {
+        image: url('./img/search.svg');
+        position: 10px center;
+        repeat: no-repeat;
+      }
+
+      @include placeholder {
+        padding-left: 20px;
+      }
+    }
+    input:active, input:focus {
+      background-image: none;
+      @include placeholder {
+        opacity: 0;
+      }
+    }
+
+  }
+}
