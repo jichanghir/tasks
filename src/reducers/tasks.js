@@ -2,7 +2,6 @@ const defaultState = {
     tasks: [],
     showedTasks: [],
     currentPage: 1,
-    // pagesCount: 1,
     tasksLimit: 25,
     filter: ''
 };

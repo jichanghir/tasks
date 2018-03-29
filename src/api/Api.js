@@ -18,6 +18,19 @@ export const ApiReal = {
                 console.log(error);
             });
         });
+    },
+
+    get_list_names() {
+        return new Promise((resolve) => {
+            axios.get(`${ADDR}?ui=get_list_names`)
+            .then((response) => {
+                console.log("response", response);
+                resolve(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        });
     }
 
     // get_cfg() {

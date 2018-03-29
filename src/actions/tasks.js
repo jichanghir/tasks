@@ -17,16 +17,32 @@ export const setCurrentPage = (value) => ({
 export const getTasks = () => (dispatch) => {
 
     ApiReal.get_cfg()
-    .then((data) => {
-        console.log("data", data);
+    .then((data) =>
+        new Promise ((resolve) => {
+            dispatch({
+                type: 'SET_TASKS',
+                payload: {
+                    tasks: data.data
+                }
+            });
 
-        dispatch({
-            type: 'SET_TASKS',
-            payload: {
-                tasks: data.data
-            }
-        });
-    })
+            resolve();
+        })
+    )
+    .then(ApiReal.get_list_names)
+    .then((data) =>
+        new Promise ((resolve) => {
+            console.log("data", data);
+            dispatch({
+                type: 'SET_LISTS',
+                payload: {
+                    data: data.lists
+                }
+            });
+
+            resolve();
+        })
+    )
     .catch((err) => {
         console.error(err);
     });

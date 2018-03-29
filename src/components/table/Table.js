@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+// import Select from 'components/ui/select/Select';
+// import Popup from 'components/ui/popup/Popup';
+
 import { getTasks } from 'actions/tasks';
+import { setPopupContent } from 'actions/ui';
 
 import './c-table.css';
 
@@ -24,7 +28,7 @@ class Table extends Component {
     // componentWillMount() {};
     // componentWillUpdate(nextProps, nextState) {};
     render() {
-
+        console.log('this.props', this.props);
         return (
             <div className="c-table">
                 <div className="c-table__header c-table__row">
@@ -51,6 +55,11 @@ class Table extends Component {
                                     {`${list.name}:${list.size}(${list.actual_size})`}
                                 </div>
                             )}
+                            <button
+                                onClick={this.props.setPopupContent.bind(null, <div>popup</div>)}
+                            >
+                                add
+                            </button>
                         </div>
                         <div className="c-table__cell c-table__cell--real-lists">
                             {task['real-lists'] && task['real-lists'].map((list) =>
@@ -84,10 +93,14 @@ export default connect(
             state.tasks.tasksLimit * state.tasks.currentPage - state.tasks.tasksLimit,
             state.tasks.tasksLimit * state.tasks.currentPage
         ),
+        lists: state.lists
     }),
     dispatch => ({
         getTasks: (data) => {
             dispatch(getTasks(data))
+        },
+        setPopupContent: (data) => {
+            dispatch(setPopupContent(data))
         }
     })
 )(Table);
