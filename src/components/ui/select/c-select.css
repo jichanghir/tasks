@@ -1,0 +1,18 @@
+.c-select {
+  height: 30px;
+  width: 100%;
+  border: 1px solid #e9e9e9;
+  border-radius: 3px;
+  background-color: #fff;
+  padding: 0 7px;
+  margin-right: 10px;
+  color: #1a1a1a;
+  font-size: 14px;
+  appearance: none;
+  background-image: url("./img/c-filter-point__select.png");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 7px) center; }
+  .c-select[disabled] {
+    color: #b2b2b2; }
+  .c-select option[disabled] {
+    color: #b2b2b2; }

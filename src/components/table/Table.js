@@ -24,6 +24,7 @@ class Table extends Component {
     // componentWillMount() {};
     // componentWillUpdate(nextProps, nextState) {};
     render() {
+
         return (
             <div className="c-table">
                 <div className="c-table__header c-table__row">
@@ -36,7 +37,8 @@ class Table extends Component {
                     <div className="c-table__cell c-table__cell--w-count">W.Count</div>
                     <div className="c-table__cell c-table__cell--ip-count">IP.Count</div>
                 </div>
-                {this.props.tasks.map((task) =>
+                {
+                this.props.tasks.map((task) =>
                     <div
                         key={task['name']}
                         className="c-table__row"
@@ -44,14 +46,14 @@ class Table extends Component {
                         <div className="c-table__cell c-table__cell--pool">{task['name']}</div>
                         <div className="c-table__cell c-table__cell--offer">{task['offer']}</div>
                         <div className="c-table__cell c-table__cell--blog-lists">
-                            {task['blog-lists'].map((list) =>
+                            {task['blog-lists'] && task['blog-lists'].map((list) =>
                                 <div key={`blist-${list.name}`}>
                                     {`${list.name}:${list.size}(${list.actual_size})`}
                                 </div>
                             )}
                         </div>
                         <div className="c-table__cell c-table__cell--real-lists">
-                            {task['real-lists'].map((list) =>
+                            {task['real-lists'] && task['real-lists'].map((list) =>
                                 <div key={`rlist-${list.name}`}>
                                     {`${list.name}:${list.size}(${list.actual_size})`}
                                 </div>
@@ -62,7 +64,8 @@ class Table extends Component {
                         <div className="c-table__cell c-table__cell--w-count">{task['count-of-waves']}</div>
                         <div className="c-table__cell c-table__cell--ip-count">{task['count-of-IPs']}</div>
                     </div>
-                )}
+                )
+            }
             </div>
         );
     };
@@ -77,25 +80,10 @@ class Table extends Component {
 
 export default connect(
     state => ({
-        // Фильтруем task по всем полям
-        tasks: state.tasks.filter((task) =>
-            task.name.toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
-            task.offer.toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
-            String(task['real-size']).toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
-            String(task['blog-size']).toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
-            String(task['count-of-waves']).toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
-            String(task['count-of-IPs']).toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
-            task['blog-lists']
-                .some((list) =>
-                    list.name.toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
-                    list.size.toLowerCase().includes(state.tableSettings.filter.toLowerCase())
-                ) ||
-            task['real-lists']
-                .some((list) =>
-                    list.name.toLowerCase().includes(state.tableSettings.filter.toLowerCase()) ||
-                    list.size.toLowerCase().includes(state.tableSettings.filter.toLowerCase())
-                )
-        )
+        tasks: state.tasks.showedTasks.slice(
+            state.tasks.tasksLimit * state.tasks.currentPage - state.tasks.tasksLimit,
+            state.tasks.tasksLimit * state.tasks.currentPage
+        ),
     }),
     dispatch => ({
         getTasks: (data) => {

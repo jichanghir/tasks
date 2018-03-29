@@ -1,0 +1,25 @@
+@import 'helpers/variables.scss';
+
+.pagination {
+    display: flex;
+
+    &__page {
+        margin: 3px;
+        cursor: pointer;
+
+        color: $subtitle-color;
+        font: {
+            size: 14px;
+            weight: 300;
+        }
+
+        &.active {
+            color: $text-color;
+            transform: scale(1.1);
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

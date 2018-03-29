@@ -1,4 +1,17 @@
 .c-table-settings {
     margin: 30px;
     display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    &__left {
+        display: flex;
+        align-items: center;
+    }
+
+    &__limit,
+    &__filter {
+        width: 200px;
+        margin-right: 10px;
+    }
 }

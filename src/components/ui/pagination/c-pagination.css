@@ -1,0 +1,13 @@
+.pagination {
+  display: flex; }
+  .pagination__page {
+    margin: 3px;
+    cursor: pointer;
+    color: #808080;
+    font-size: 14px;
+    font-weight: 300; }
+    .pagination__page.active {
+      color: #333333;
+      transform: scale(1.1); }
+    .pagination__page:hover {
+      text-decoration: underline; }

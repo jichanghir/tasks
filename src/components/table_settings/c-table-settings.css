@@ -1,3 +1,11 @@
 .c-table-settings {
   margin: 30px;
-  display: flex; }
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; }
+  .c-table-settings__left {
+    display: flex;
+    align-items: center; }
+  .c-table-settings__limit, .c-table-settings__filter {
+    width: 200px;
+    margin-right: 10px; }
