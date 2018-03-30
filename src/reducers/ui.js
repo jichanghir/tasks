@@ -1,12 +1,18 @@
 const defaultState = {
-    popupContent: null
+    messageText: null,
+    messageType: null
 }
 
 export default (state = defaultState, action) => {
     switch (action.type) {
 
-        case 'SET_POPUP_CONTENT' :
-            return {...state, popupContent: action.payload.data}
+        case 'SET_MESSAGE' : {
+            return {
+                ...state,
+                messageText: action.meta.message,
+                messageType: action.error ? 'error' : 'success'
+            }
+        }
 
         default :
             return state;

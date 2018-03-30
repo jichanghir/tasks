@@ -1,0 +1,30 @@
+.button {
+  text-align: center;
+  height: 30px;
+  padding: 0 20px;
+  line-height: 28px;
+  text-transform: uppercase;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &--light {
+    background: #fff;
+    border: 1px solid #eaeaea;
+    color:#232323;
+
+    &:hover {
+      border: 1px solid #b2b2b2;
+    }
+  }
+
+  &--dark {
+    background: #232323;
+    color:#fff;
+    border: 1px solid transparent;
+
+    &:hover {
+      background: #707070;
+    }
+  }
+}

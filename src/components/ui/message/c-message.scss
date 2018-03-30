@@ -1,0 +1,41 @@
+@import 'helpers/variables.scss';
+
+.c-message {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 50px;
+
+    display: flex;
+    justify-content: center;
+
+
+    &__content {
+        padding: 30px;
+        text-align: center;
+        background-color: white;
+        border: 1px solid $border-color;
+        border-radius: 3px;
+        box-shadow: 0 0 10px $text-color;
+
+        font: {
+            size: 14px;
+            weight: 300;
+        }
+    }
+
+    &.hidden {
+        display: none;
+    }
+
+    &.error {
+        .c-message__content {
+            color: red;
+        }
+    }
+    &.success {
+        .c-message__content {
+            color: $text-color;
+        }
+    }
+}

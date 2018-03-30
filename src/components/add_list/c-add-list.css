@@ -1,0 +1,12 @@
+.c-add-list {
+  display: flex;
+  align-items: center; }
+  .c-add-list__select {
+    flex: 1;
+    height: 20px;
+    line-height: 18px; }
+  .c-add-list__btn {
+    width: 10px;
+    margin-left: 5px;
+    text-align: center;
+    cursor: pointer; }

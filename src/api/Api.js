@@ -24,14 +24,37 @@ export const ApiReal = {
         return new Promise((resolve) => {
             axios.get(`${ADDR}?ui=get_list_names`)
             .then((response) => {
-                console.log("response", response);
                 resolve(response.data);
             })
             .catch((error) => {
                 console.log(error);
             });
         });
-    }
+    },
+
+    add_list({group, task_name, alias}) {
+        return new Promise((resolve) => {
+            axios.get(`${ADDR}?ui=add_list&group=${group}&task_name=${task_name}&alias=${alias}`)
+            .then((response) => {
+                resolve(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        });
+    },
+
+    remove_list({group, task_name, alias}) {
+        return new Promise((resolve) => {
+            axios.get(`${ADDR}?ui=remove_list&group=${group}&task_name=${task_name}&alias=${alias}`)
+            .then((response) => {
+                resolve(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        });
+    },
 
     // get_cfg() {
     //     axios.post(`${ADDR}`, {

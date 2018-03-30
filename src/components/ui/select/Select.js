@@ -11,16 +11,13 @@
     * options: массив объектов, которые имеют два значения: value и label
     * disabledValue: значение которое передается в option disabled
 
-    ** пример:
-    options = [
-        {value:'one', label:'one'},
-        {value:'two', label:'two'},
-        {value:'three', label:'something'}
-    ]
-
  * Пример:
     <Select
-        options={options}
+        options={[
+            {value:'one', label:'one'},
+            {value:'two', label:'two'},
+            {value:'three', label:'something'}
+        ]}
         onChange={this.doSomething}
     />
 */

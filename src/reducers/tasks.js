@@ -3,7 +3,8 @@ const defaultState = {
     showedTasks: [],
     currentPage: 1,
     tasksLimit: 25,
-    filter: ''
+    filter: '',
+    lists: []
 };
 
 export default (state = defaultState, action) => {
@@ -18,23 +19,25 @@ export default (state = defaultState, action) => {
         }
 
         case 'FILTER_TASKS' : {
+            const filter = action.payload.filter || state.filter;
+
             const showedTasks = state.tasks.filter((task) =>
-                task.name.toLowerCase().includes(action.payload.filter.toLowerCase()) ||
-                task.offer.toLowerCase().includes(action.payload.filter.toLowerCase()) ||
-                String(task['real-size']).toLowerCase().includes(action.payload.filter.toLowerCase()) ||
-                String(task['blog-size']).toLowerCase().includes(action.payload.filter.toLowerCase()) ||
-                String(task['count-of-waves']).toLowerCase().includes(action.payload.filter.toLowerCase()) ||
-                String(task['count-of-IPs']).toLowerCase().includes(action.payload.filter.toLowerCase()) ||
+                task.name.toLowerCase().includes(filter.toLowerCase()) ||
+                task.offer.toLowerCase().includes(filter.toLowerCase()) ||
+                String(task['real-size']).toLowerCase().includes(filter.toLowerCase()) ||
+                String(task['blog-size']).toLowerCase().includes(filter.toLowerCase()) ||
+                String(task['count-of-waves']).toLowerCase().includes(filter.toLowerCase()) ||
+                String(task['count-of-IPs']).toLowerCase().includes(filter.toLowerCase()) ||
                 (task['blog-lists'] && task['blog-lists']
                     .some((list) =>
-                        list.name.toLowerCase().includes(action.payload.filter.toLowerCase()) ||
-                        list.size.toLowerCase().includes(action.payload.filter.toLowerCase())
+                        list.name.toLowerCase().includes(filter.toLowerCase()) ||
+                        list.size.toLowerCase().includes(filter.toLowerCase())
                     )
                 ) ||
                 (task['real-lists'] && task['real-lists']
                     .some((list) =>
-                        list.name.toLowerCase().includes(action.payload.filter.toLowerCase()) ||
-                        list.size.toLowerCase().includes(action.payload.filter.toLowerCase())
+                        list.name.toLowerCase().includes(filter.toLowerCase()) ||
+                        list.size.toLowerCase().includes(filter.toLowerCase())
                     )
                 )
             );
@@ -62,6 +65,51 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 currentPage: action.payload.data,
+            }
+        }
+
+        case 'SET_LISTS' : {
+            return {
+                ...state,
+                lists: action.payload.data
+            }
+        }
+
+        case 'ADD_LIST' : {
+            const newLists = action.payload.data;
+            const keys = Object.keys(newLists);
+
+            let tasks = state.tasks.map((task, index) => {
+
+                if (keys.includes(task.name)) {
+                    return newLists[task.name]
+                }
+
+                return task;
+            });
+
+            return {
+                ...state,
+                tasks
+            }
+        }
+
+        case 'REMOVE_LIST' : {
+            const newLists = action.payload.data;
+            const keys = Object.keys(newLists);
+
+            let tasks = state.tasks.map((task, index) => {
+
+                if (keys.includes(task.name)) {
+                    return newLists[task.name]
+                }
+
+                return task;
+            });
+
+            return {
+                ...state,
+                tasks
             }
         }
 

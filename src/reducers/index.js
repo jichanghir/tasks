@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 
 import tasks from './tasks';
-import lists from './lists';
 import ui from './ui';
+import popup from './popup';
 
 export default combineReducers({
     tasks,
-    lists,
-    ui
+    ui,
+    popup
 });
 
 

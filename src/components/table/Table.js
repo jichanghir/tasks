@@ -4,18 +4,21 @@ import PropTypes from 'prop-types';
 
 // import Select from 'components/ui/select/Select';
 // import Popup from 'components/ui/popup/Popup';
+import AddList from 'components/add_list/AddList';
+import RemoveList from 'components/remove_list/RemoveList';
 
 import { getTasks } from 'actions/tasks';
-import { setPopupContent } from 'actions/ui';
+// import { setPopupContent } from 'actions/ui';
 
 import './c-table.css';
+import './c-list-row.css';
 
 class Table extends Component {
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
 
-        this.state = {}
-    };
+    //     this.state = {}
+    // };
 
     static propTypes = {
         tasks: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
@@ -28,7 +31,7 @@ class Table extends Component {
     // componentWillMount() {};
     // componentWillUpdate(nextProps, nextState) {};
     render() {
-        console.log('this.props', this.props);
+
         return (
             <div className="c-table">
                 <div className="c-table__header c-table__row">
@@ -51,22 +54,45 @@ class Table extends Component {
                         <div className="c-table__cell c-table__cell--offer">{task['offer']}</div>
                         <div className="c-table__cell c-table__cell--blog-lists">
                             {task['blog-lists'] && task['blog-lists'].map((list) =>
-                                <div key={`blist-${list.name}`}>
-                                    {`${list.name}:${list.size}(${list.actual_size})`}
+                                <div
+                                    key={`blist-${list.name}`}
+                                    className="c-list-row"
+                                >
+                                    <div className="c-list-row__name">
+                                        {`${list.name}:${list.size}(${list.actual_size})`}
+                                    </div>
+                                    <RemoveList
+                                        group="blog"
+                                        task_name={task['name']}
+                                        alias={list.name}
+                                    />
                                 </div>
                             )}
-                            <button
-                                onClick={this.props.setPopupContent.bind(null, <div>popup</div>)}
-                            >
-                                add
-                            </button>
+                            <AddList
+                                group="blog"
+                                task_name={task['name']}
+                            />
                         </div>
                         <div className="c-table__cell c-table__cell--real-lists">
                             {task['real-lists'] && task['real-lists'].map((list) =>
-                                <div key={`rlist-${list.name}`}>
-                                    {`${list.name}:${list.size}(${list.actual_size})`}
+                                <div
+                                    key={`blist-${list.name}`}
+                                    className="c-list-row"
+                                >
+                                    <div key={`rlist-${list.name}`}>
+                                        {`${list.name}:${list.size}(${list.actual_size})`}
+                                    </div>
+                                    <RemoveList
+                                        group="real"
+                                        task_name={task['name']}
+                                        alias={list.name}
+                                    />
                                 </div>
                             )}
+                            <AddList
+                                group="real"
+                                task_name={task['name']}
+                            />
                         </div>
                         <div className="c-table__cell c-table__cell--b-amount">{task['blog-size']}</div>
                         <div className="c-table__cell c-table__cell--r-amount">{task['real-size']}</div>
@@ -99,8 +125,8 @@ export default connect(
         getTasks: (data) => {
             dispatch(getTasks(data))
         },
-        setPopupContent: (data) => {
-            dispatch(setPopupContent(data))
-        }
+        // setPopupContent: (data) => {
+        //     dispatch(setPopupContent(data))
+        // }
     })
 )(Table);

@@ -1,0 +1,22 @@
+.c-message {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 50px;
+  display: flex;
+  justify-content: center; }
+  .c-message__content {
+    padding: 30px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #e3e3e3;
+    border-radius: 3px;
+    box-shadow: 0 0 10px #333333;
+    font-size: 14px;
+    font-weight: 300; }
+  .c-message.hidden {
+    display: none; }
+  .c-message.error .c-message__content {
+    color: red; }
+  .c-message.success .c-message__content {
+    color: #333333; }

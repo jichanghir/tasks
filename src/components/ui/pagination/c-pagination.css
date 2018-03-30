@@ -8,6 +8,6 @@
     font-weight: 300; }
     .pagination__page.active {
       color: #333333;
-      transform: scale(1.1); }
+      transform: scale(1.2); }
     .pagination__page:hover {
       text-decoration: underline; }
