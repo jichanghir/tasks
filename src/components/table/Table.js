@@ -45,61 +45,88 @@ class Table extends Component {
                     <div className="c-table__cell c-table__cell--ip-count">IP.Count</div>
                 </div>
                 {
-                this.props.tasks.map((task) =>
-                    <div
-                        key={task['name']}
-                        className="c-table__row"
-                    >
-                        <div className="c-table__cell c-table__cell--pool">{task['name']}</div>
-                        <div className="c-table__cell c-table__cell--offer">{task['offer']}</div>
-                        <div className="c-table__cell c-table__cell--blog-lists">
-                            {task['blog-lists'] && task['blog-lists'].map((list) =>
-                                <div
-                                    key={`blist-${list.name}`}
-                                    className="c-list-row"
-                                >
-                                    <div className="c-list-row__name">
-                                        {`${list.name}:${list.size}(${list.actual_size})`}
+                this.props.tasks.map((task) => {
+                    const blogActualSizeSumm = task['blog-lists']
+                    ? task['blog-lists'].reduce((summ, list) => {
+                        return summ + list.actual_size;
+                    }, 0)
+                    : null;
+
+                    const realActualSizeSumm = task['real-lists']
+                    ? task['real-lists'].reduce((summ, list) => {
+                        return summ + list.actual_size;
+                    }, 0)
+                    : null;
+
+                    return (
+                        <div
+                            key={task['name']}
+                            className="c-table__row"
+                        >
+                            <div className="c-table__cell c-table__cell--pool">{task['name']}</div>
+                            <div className="c-table__cell c-table__cell--offer">{task['offer']}</div>
+                            <div className="c-table__cell c-table__cell--blog-lists">
+                                {task['blog-lists'] && task['blog-lists'].map((list) =>
+                                    <div
+                                        key={`blist-${list.name}`}
+                                        className="c-list-row"
+                                    >
+                                        <div
+                                            className={`c-list-row__name ${list.state_class === 'e-list-empty' ? 'empty-list' : ''} ${list.state_class === 'e-list-insufficient' ? 'empty-insufficient' : ''}`}
+                                        >
+                                            {`${list.name}:${list.size}${list.actual_size ? `(${list.actual_size})` : ''}`}
+                                        </div>
+                                        <RemoveList
+                                            group="blog"
+                                            task_name={task['name']}
+                                            alias={list.name}
+                                        />
                                     </div>
-                                    <RemoveList
-                                        group="blog"
-                                        task_name={task['name']}
-                                        alias={list.name}
-                                    />
-                                </div>
-                            )}
-                            <AddList
-                                group="blog"
-                                task_name={task['name']}
-                            />
-                        </div>
-                        <div className="c-table__cell c-table__cell--real-lists">
-                            {task['real-lists'] && task['real-lists'].map((list) =>
-                                <div
-                                    key={`blist-${list.name}`}
-                                    className="c-list-row"
-                                >
-                                    <div key={`rlist-${list.name}`}>
-                                        {`${list.name}:${list.size}(${list.actual_size})`}
+                                )}
+                                <AddList
+                                    group="blog"
+                                    task_name={task['name']}
+                                />
+                            </div>
+                            <div className="c-table__cell c-table__cell--real-lists">
+                                {task['real-lists'] && task['real-lists'].map((list) =>
+                                    <div
+                                        key={`rlist-${list.name}`}
+                                        className="c-list-row"
+                                    >
+                                        <div
+                                            className={`c-list-row__name ` +
+                                            `${list.state_class === 'e-list-empty' ? 'empty-list' : ''} ` +
+                                            `${list.state_class === 'e-list-insufficient' ? 'insufficient-list' : ''}`
+                                            }
+                                        >
+                                            {`${list.name}:${list.size}${list.actual_size ? `(${list.actual_size})` : ''}`}
+                                        </div>
+                                        <RemoveList
+                                            group="real"
+                                            task_name={task['name']}
+                                            alias={list.name}
+                                        />
                                     </div>
-                                    <RemoveList
-                                        group="real"
-                                        task_name={task['name']}
-                                        alias={list.name}
-                                    />
-                                </div>
-                            )}
-                            <AddList
-                                group="real"
-                                task_name={task['name']}
-                            />
+                                )}
+                                <AddList
+                                    group="real"
+                                    task_name={task['name']}
+                                />
+                            </div>
+                            <div className="c-table__cell c-table__cell--b-amount">
+                                <div>{task['blog-size']}</div>
+                                {blogActualSizeSumm && <div>({blogActualSizeSumm})</div>}
+                            </div>
+                            <div className="c-table__cell c-table__cell--r-amount">
+                                <div>{task['real-size']}</div>
+                                {realActualSizeSumm && <div>({realActualSizeSumm})</div>}
+                            </div>
+                            <div className="c-table__cell c-table__cell--w-count">{task['count-of-waves']}</div>
+                            <div className="c-table__cell c-table__cell--ip-count">{task['count-of-IPs']}</div>
                         </div>
-                        <div className="c-table__cell c-table__cell--b-amount">{task['blog-size']}</div>
-                        <div className="c-table__cell c-table__cell--r-amount">{task['real-size']}</div>
-                        <div className="c-table__cell c-table__cell--w-count">{task['count-of-waves']}</div>
-                        <div className="c-table__cell c-table__cell--ip-count">{task['count-of-IPs']}</div>
-                    </div>
-                )
+                    )
+                })
             }
             </div>
         );

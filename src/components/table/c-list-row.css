@@ -7,3 +7,7 @@
     border-bottom: 1px solid #e3e3e3; }
   .c-list-row__name {
     flex: 1; }
+    .c-list-row__name.empty-list {
+      color: orange; }
+    .c-list-row__name.insufficient-list {
+      color: red; }

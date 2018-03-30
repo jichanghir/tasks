@@ -12,5 +12,12 @@
 
     &__name {
         flex: 1;
+
+        &.empty-list {
+            color: orange;
+        }
+        &.insufficient-list {
+            color: red;
+        }
     }
 }
